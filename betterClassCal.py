@@ -1,0 +1,82 @@
+# import dependencies and create the app
+from flask import Flask, render_template, url_for, request, redirect
+from flask_sqlalchemy import SQLAlchemy
+import datetime
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Classes.db'
+db = SQLAlchemy(app)
+
+class StudentClass(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    title = db.Column(db.String(255), nullable=False, server_default="Generic Course")
+    link = db.Column(db.String(255), server_default="https://www.google.com")
+    day = db.Column(db.String(10))
+    start = db.Column(db.Time, default=datetime.time(0, 0))
+    end = db.Column(db.Time, default=datetime.time(0, 0))
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    to_delete = StudentClass.query.get_or_404(id)
+    try:
+        db.session.delete(to_delete)
+        db.session.commit()
+        return redirect('/configure')
+    except:
+        redirect('/error')
+
+# index page
+@app.route('/', methods=['POST', 'GET'])
+def index():
+    if request.method == 'POST':
+        return redirect('/')
+    else:
+        classes = StudentClass.query.order_by(StudentClass.title).all()
+        return render_template('/public/index.html', classes=classes)
+
+# configure page for adding / remoiving classes
+@app.route('/configure', methods=['POST', 'GET'])
+def configure():
+    if request.method == 'POST':
+        title = request.form['title']
+        if title == "": title = "Generic Course"
+        link = request.form['link']
+        if link == "": link = "https://www.google.com"
+        day = request.form['day']
+        try:
+            s1, s2 = request.form['start'].split(':', 1)
+            e1, e2 = request.form['end'].split(':', 1)
+        except:
+            s1 = 0
+            s2 = 0
+            e1 = 0
+            e2 = 0        
+        start = datetime.time(int(s1), int(s2))
+        end = datetime.time(int(e1), int(e2))
+        
+        # create new entry into db
+        new_class = StudentClass(title=title, link=link, day=day, start=start, end=end)
+        # push to db
+        try:
+            db.session.add(new_class)
+            db.session.commit()
+            return redirect('/configure')
+        except:
+            return redirect('/error')
+
+    else:
+        classes = StudentClass.query.order_by(StudentClass.title).all()
+        return render_template("/public/configure.html", classes=classes)
+
+@app.route('/error', methods=['POST', 'GET'])
+def error():
+    if request.method == 'POST':
+        return redirect('/error')
+    else:
+        return '''
+            <a href="/"><p>there was an error. click here to go to the home page</p></a>
+        '''
+
+if __name__ == "__main__":
+    app.run(debug=True)
+

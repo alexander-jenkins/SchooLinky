@@ -4,6 +4,7 @@
 - [ x ] link the forms to a database
 - [ ] style the HTML skeleton
 - [ ] dynamically update the HTML using Flask
+    - [ ] math for showing the nearest class (future)
 
 ## Required Functions
 * adding classes

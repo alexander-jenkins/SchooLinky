@@ -6,6 +6,7 @@ import datetime
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Classes.db'
 db = SQLAlchemy(app)
+name = "Alex"
 
 class StudentClass(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -25,6 +26,11 @@ def delete(id):
     except:
         redirect('/error')
 
+@app.route('/setName', methods=["POST"])
+def setName():
+    name = request.form['name']
+    return redirect('/configure')
+
 # index page
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -32,7 +38,7 @@ def index():
         return redirect('/')
     else:
         classes = StudentClass.query.order_by(StudentClass.title).all()
-        return render_template('/public/index.html', classes=classes)
+        return render_template('/public/index.html', classes=classes, name=name)
 
 # configure page for adding / remoiving classes
 @app.route('/configure', methods=['POST', 'GET'])

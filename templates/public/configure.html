@@ -8,6 +8,18 @@
 <!-- Open the add new class menu -->
 <button id="homeBtn">Home</button>
 <button id="newClassBtn">New Class</button>
+<button id="setNameBtn">Set Your name</button>
+<div id="setName" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1>Set Your Name</h1>
+    <form action="/setName", method="post">
+      <label for="name">What is your name?</label><br>
+      <input type="text" name="name"><br>
+      <input type="submit" value="Set Name">
+    </form>
+  </div>
+</div>
 <div id="newClass" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>

@@ -65,7 +65,7 @@ def index():
     global today
     cTime = datetime.datetime.now()
     cTime = cTime.strftime('%H:%M')
-    
+
     return render_template('/public/index.html', name=name, ctime=cTime, today=today, classes=getClasses())
 
 # configure page for adding / remoiving classes

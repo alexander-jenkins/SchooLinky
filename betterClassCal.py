@@ -2,12 +2,12 @@
 from flask import Flask, render_template, url_for, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+import time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Classes.db'
 db = SQLAlchemy(app)
 name = "Name"
-today = datetime.datetime.now().strftime('%A')
 
 class StudentClass(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -33,15 +33,8 @@ def setName():
     name = request.form['name']
     return redirect('/configure')
 
-# find out if you are in class or there is a class next
-def inClass():
-    if True:
-        return True
-    else: return False
-
 # get list the daily classes
-def getClasses():
-    global today
+def getClasses(today):
     if (today == "Sunday"):
         classes =  StudentClass.query.filter(StudentClass.day=="Sunday").order_by(StudentClass.start)
     elif (today == "Monday"):
@@ -58,15 +51,46 @@ def getClasses():
         classes = StudentClass.query.filter(StudentClass.day=="Saturday").order_by(StudentClass.start)
     return classes
 
+# get list of upcoming classes
+def getNext(classes):
+    upcoming = []
+    now = datetime.datetime.now().time()
+
+    for course in classes:
+        #if start time >= current time
+        if (course.end >= now):
+            upcoming.append(course)
+    return upcoming
+
+# get the current class
+def getCurrent(upcoming):
+    return upcoming.pop(0)
+    
+# get the previous classes
+def getPrevious(classes):
+    previous = []
+    now = datetime.datetime.now().time()
+
+    for course in classes:
+        if (course.end < now):
+            previous.append(course)
+    return previous
+
 # index page
 @app.route('/')
 def index():
     global name
-    global today
+    today = datetime.datetime.now().strftime('%A')
     cTime = datetime.datetime.now()
-    cTime = cTime.strftime('%H:%M')
+    sTime = cTime.strftime('%H:%M')
 
-    return render_template('/public/index.html', name=name, ctime=cTime, today=today, classes=getClasses())
+    # sort the classes
+    classes = getClasses(today)
+    upcoming = getNext(classes)
+    current = getCurrent(upcoming)
+    previous = getPrevious(classes)
+
+    return render_template('/public/index.html', name=name, ctime=sTime, today=today, upcoming=upcoming, current=current, previous=previous)
 
 # configure page for adding / remoiving classes
 @app.route('/configure', methods=['POST', 'GET'])
@@ -114,4 +138,3 @@ def error():
 
 if __name__ == "__main__":
     app.run(debug=True)
-

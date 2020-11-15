@@ -6,12 +6,35 @@
 
     <div id="homepage">
         <button onclick="window.location.href='/configure'">Configure Application</button>
-        <h1>Welcome, <i>{{name}}</i>.</h1>
-        <h1>It Is Currently {{ctime}}</h1>
-        <h3>These are your classes for today ({{today}}):</h3>
-        {% for class in classes %}
-            <p>{{class.title}} at {{class.start}}</p>
-        {% endfor %}
+
+        <div class="welcomeBar">
+            <h1 class="welcomeBar">Welcome, <i>{{name}}</i>.</h1>
+            <h1 class="welcomeBar">It Is Currently {{ctime}}</h1>
+        </div>
+
+        <!-- Next classes -->
+        <div class="nextClasses">
+            <h3 class="nextClasses">Remaining Classes for ({{today}}):</h3>
+            {% for class in upcoming %}
+                <p class="nextClasses">{{class.title}} at {{class.start}}</p>
+            {% endfor %}
+        </div>
+
+        <!-- Current Class -->
+        <div class="currentClass">
+            <h1 class="currentClass">Current:</h1>
+            <h1 class="currentClass">
+                {{current.title}} at {{current.start}}
+            </h1>
+        </div>
+
+        <!-- Previous classes -->
+        <h3 class="prevClasses">Previous Classes for ({{today}}):</h3>
+        <div class="prevClasses">
+            {% for class in previous %}
+                <p class="prevClasses">{{class.title}} at {{class.start}}</p>
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

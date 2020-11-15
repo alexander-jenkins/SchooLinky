@@ -72,7 +72,6 @@ def configure():
         try:
             db.session.add(new_class)
             db.session.commit()
-            db.order_by(StudentClass.start.asc()) # asc
             return redirect('/configure')
         except:
             return redirect('/error')

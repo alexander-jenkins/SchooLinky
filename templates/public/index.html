@@ -1,23 +1,11 @@
 {% extends 'base.html' %}
 
-{% block head %}
-
-<script>
-
-    var confButton = document.getElementById("configureLink");
-    confButton.onclick = function() {
-        window.open("/configure", name="_self");
-    }
-
-</script>
-
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block body %}
 
     <div id="homepage">
-        <button id="configureLink">Configure Application</button>
-        Welcome to the better class calendar.
+        <button onclick="window.location.href='/configure'">Configure Application</button>
         <br>
         <h1>Welcome, <i>{{name}}</i>.</h1>
         <br>

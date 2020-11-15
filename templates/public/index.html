@@ -6,18 +6,12 @@
 
     <div id="homepage">
         <button onclick="window.location.href='/configure'">Configure Application</button>
-        <br>
         <h1>Welcome, <i>{{name}}</i>.</h1>
-        <br>
         <h1>It Is Currently {{ctime}}</h1>
-        
-        {% if 1 == 1 %}
-            
-        {% else %}
-
-        <h1><b>[cName]</b> starts in <u>[cTime minus class start time]</u> minutes.<h1>
-
-        {% endif %}
+        <h3>These are your classes for today ({{today}}):</h3>
+        {% for class in classes %}
+            <p>{{class.title}} at {{class.start}}</p>
+        {% endfor %}
     </div>
 
 {% endblock %}

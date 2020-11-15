@@ -32,6 +32,12 @@ def setName():
     name = request.form['name']
     return redirect('/configure')
 
+# find out if you are in class or there is a class next
+def inClass():
+    if True:
+        return True
+    else: return False
+
 # index page
 @app.route('/')
 def index():
@@ -66,6 +72,7 @@ def configure():
         try:
             db.session.add(new_class)
             db.session.commit()
+            db.order_by(StudentClass.start.asc()) # asc
             return redirect('/configure')
         except:
             return redirect('/error')

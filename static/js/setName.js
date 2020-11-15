@@ -1,14 +1,14 @@
-var modal = document.getElementById("setName");
-var btn = document.getElementById("setNameBtn");
-var span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-  modal.style.display = "block";
+var nameModal = document.getElementById("setName");
+var nameBtn = document.getElementById("setNameBtn");
+var nameSpan = document.getElementsByClassName("close")[0];
+nameBtn.onclick = function() {
+  nameModal.style.display = "block";
 }
-span.onclick = function() {
-  modal.style.display = "none";
+nameSpan.onclick = function() {
+  nameModal.style.display = "none";
 }
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  if (event.target == nameModal) {
+    nameModal.style.display = "none";
   }
 }

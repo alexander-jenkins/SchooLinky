@@ -3,15 +3,16 @@
 {% block head %}
 {% endblock %}
 
-
 {% block body %}
-<!-- Open the add new class menu -->
+<!-- Nav Buttons -->
 <button id="homeBtn">Home</button>
 <button id="newClassBtn">New Class</button>
 <button id="setNameBtn">Set Your name</button>
+
+<!-- Change your name form -->
 <div id="setName" class="modal">
   <div class="modal-content">
-    <span class="close">&times;</span>
+    <span class="close">&times;</span> <!-- Close button -->
     <h1>Set Your Name</h1>
     <form action="/setName", method="post">
       <label for="name">What is your name?</label><br>
@@ -20,9 +21,11 @@
     </form>
   </div>
 </div>
+
+<!-- Add a new course form -->
 <div id="newClass" class="modal">
   <div class="modal-content">
-    <span class="close">&times;</span>
+    <span class="close">&times;</span> <!-- Close button -->
     <h1>Add a New Course to the Database</h1>
     <form action="/configure", method="post">
       <label for="title">What is the name of your course?</label><br>
@@ -69,6 +72,7 @@
   </form>
   </div>
 </div>
+
 <!-- List off all the classes added-->
 <table>
   <tr>

@@ -1,13 +1,19 @@
 * {
   font-family: sans-serif;
   text-align: center;
+  padding: 0;
+}
+
+.conf, .conf > button{
+  margin: 5px 0px;
+  background-color: gray;
 }
 
 .container {
   display: flex;
   justify-content: center;
-  align-content: center;
-  align-items: center;
+  align-content: stretch;
+  height: 100vh;
 }
 .container > div {
   flex: 1; /*grow*/
@@ -15,17 +21,24 @@
 
 .welcomeBar {
   width: 100%;
-  background-color: gray;
+  background-color: darkgray;
+  margin: 5px;
 }
 
 .currentClass {
   background-color: darkgray;
 }
-.currentClass > h1 {
-  border-bottom: 2px black;
+
+.nextClasses {
+  background-color: lightgray;
+}
+
+.prevClasses {
+  background-color: lightgray;
 }
 
 table, td, tr {
+  padding: 2px;
   border: 1px solid black;
   text-align: center;
   margin-left: auto;

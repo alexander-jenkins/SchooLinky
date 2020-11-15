@@ -3,11 +3,13 @@
 {% block head %}{% endblock %}
 
 {% block body %}
-    <div class="welcomeBar">
+    <div class="conf">
         <button onclick="window.location.href='/configure'">Configure Application</button>
+    </div>
+    <div class="welcomeBar">
         <h1>
             Welcome, {{name}}! <br>
-            It is currently {{time}} on {{today}}.<br>
+            It is currently {{time}} on {{today}}.
         </h1>
     </div>
 
@@ -15,30 +17,53 @@
 
         <!-- Next classes -->
         <div class="nextClasses">
-            <h3 class="nextClasses">Remaining Classes for ({{today}}):</h3>
-            {% for class in upcoming %}
-                <p class="nextClasses">{{class.title}} at {{class.start}}</p>
-            {% endfor %}
+            <h1 class="nextClasses">Remaining Classes for ({{today}}):</h1>
+            <table>
+                {% for class in upcoming %}
+                <tr>
+                    <td>
+                        <p class="nextClasses">{{class.title}} at {{class.start}}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
 
         <!-- Current Class -->
         <div class="currentClass">
-            <h1 class="currentClass">Happening Now</h1>
-            <h2 class="currentClass">
-                {{current.title}} <br>
-                From {{current.start}} until {{current.end}} <br>
-                <a href="{{current.link}}" style="background-color: green; text-decoration: none;">Click Here for Access</a>
-            </h2>
+            <h1 class="currentClass">Happening Now:</h1>
+            <table>
+                <tr>
+                    <td style="size: 3em; text-decoration: bold;">
+                        {{current.title}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        From {{current.start}} until {{current.end}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="{{current.link}}" style="background-color: green; text-decoration: none;">Click Here for Access</a>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <!-- Previous classes -->
         <div class="prevClasses">
-            <h3 class="prevClasses">Previous Classes for ({{today}}):</h3>
-            {% for class in previous %}
-                <p class="prevClasses">{{class.title}} at {{class.start}}</p>
-            {% endfor %}
+            <h1 class="prevClasses">Previous Classes for ({{today}}):</h1>
+            <table>
+                    {% for class in previous %}
+                    <tr>
+                        <td>
+                            <p class="prevClasses">{{class.title}} at {{class.start}}</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
         </div>
 
     </div>
-
 {% endblock %}

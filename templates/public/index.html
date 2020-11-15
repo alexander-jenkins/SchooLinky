@@ -3,14 +3,15 @@
 {% block head %}{% endblock %}
 
 {% block body %}
-
-    <div id="homepage">
+    <div class="welcomeBar">
         <button onclick="window.location.href='/configure'">Configure Application</button>
+        <h1>
+            Welcome, {{name}}! <br>
+            It is currently {{time}} on {{today}}.<br>
+        </h1>
+    </div>
 
-        <div class="welcomeBar">
-            <h1 class="welcomeBar">Welcome, <i>{{name}}</i>.</h1>
-            <h1 class="welcomeBar">It Is Currently {{ctime}}</h1>
-        </div>
+    <div class="container">
 
         <!-- Next classes -->
         <div class="nextClasses">
@@ -22,19 +23,22 @@
 
         <!-- Current Class -->
         <div class="currentClass">
-            <h1 class="currentClass">Current:</h1>
-            <h1 class="currentClass">
-                {{current.title}} at {{current.start}}
-            </h1>
+            <h1 class="currentClass">Happening Now</h1>
+            <h2 class="currentClass">
+                {{current.title}} <br>
+                From {{current.start}} until {{current.end}} <br>
+                <a href="{{current.link}}" style="background-color: green; text-decoration: none;">Click Here for Access</a>
+            </h2>
         </div>
 
         <!-- Previous classes -->
-        <h3 class="prevClasses">Previous Classes for ({{today}}):</h3>
         <div class="prevClasses">
+            <h3 class="prevClasses">Previous Classes for ({{today}}):</h3>
             {% for class in previous %}
                 <p class="prevClasses">{{class.title}} at {{class.start}}</p>
             {% endfor %}
         </div>
+
     </div>
 
 {% endblock %}

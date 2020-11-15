@@ -54,7 +54,6 @@ def getClasses(today):
 def getNext(classes):
     upcoming = []
     now = datetime.datetime.now().time()
-
     for course in classes:
         #if start time >= current time
         if (course.end >= now):
@@ -63,13 +62,15 @@ def getNext(classes):
 
 # get the current class
 def getCurrent(upcoming):
-    return upcoming.pop(0)
-    
+    try:
+        return upcoming.pop(0)
+    except:
+        return StudentClass()
+
 # get the previous classes
 def getPrevious(classes):
     previous = []
     now = datetime.datetime.now().time()
-
     for course in classes:
         if (course.end < now):
             previous.append(course)
@@ -80,16 +81,13 @@ def getPrevious(classes):
 def index():
     global name
     today = datetime.datetime.now().strftime('%A')
-    cTime = datetime.datetime.now()
-    sTime = cTime.strftime('%H:%M')
-
+    time = datetime.datetime.now().time().strftime('%H:%M')
     # sort the classes
     classes = getClasses(today)
     upcoming = getNext(classes)
     current = getCurrent(upcoming)
     previous = getPrevious(classes)
-
-    return render_template('/public/index.html', name=name, ctime=sTime, today=today, upcoming=upcoming, current=current, previous=previous)
+    return render_template('/public/index.html', name=name, time=time, today=today, upcoming=upcoming, current=current, previous=previous)
 
 # configure page for adding / remoiving classes
 @app.route('/configure', methods=['POST', 'GET'])
@@ -110,7 +108,6 @@ def configure():
             e2 = 0        
         start = datetime.time(int(s1), int(s2))
         end = datetime.time(int(e1), int(e2))
-        
         # create new entry into db
         new_class = StudentClass(title=title, link=link, day=day, start=start, end=end)
         # push to db
@@ -120,7 +117,6 @@ def configure():
             return redirect('/configure')
         except:
             return redirect('/error')
-
     else:
         classes = StudentClass.query.order_by(StudentClass.start).all()
         #classes = StudentClass.query.filter(StudentClass.day=="Sunday").order_by(StudentClass.start)

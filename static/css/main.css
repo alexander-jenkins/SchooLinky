@@ -1,23 +1,33 @@
-body {
-  size: 100%;
-  margin: 0;
+* {
   font-family: sans-serif;
   text-align: center;
-  background-color: rgb(211, 211, 211);
-  color: #000000;
 }
 
-#homepage {
-  text-align: center;
+.container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.container > div {
+  flex: 1; /*grow*/
+}
+
+.welcomeBar {
+  width: 100%;
+  background-color: gray;
 }
 
 .currentClass {
-  display: inline;
+  background-color: darkgray;
+}
+.currentClass > h1 {
+  border-bottom: 2px black;
 }
 
 table, td, tr {
   border: 1px solid black;
-  text-align: center
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 }

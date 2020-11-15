@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
-{% block head %}{% endblock %}
+{% block head %}
+
+<script>
+
+    var confButton = document.getElementById("configureLink");
+    confButton.onclick = function() {
+        window.open("/configure", name="_self");
+    }
+
+</script>
+
+{% endblock %}
 
 {% block body %}
 
-    <div id="homepage" onload="cTime()">
+    <div id="homepage">
         <button id="configureLink">Configure Application</button>
         Welcome to the better class calendar.
         <br>

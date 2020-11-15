@@ -1,7 +1,7 @@
 # import dependencies and create the app
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
-import datetime
+import datetime  
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Classes.db'

@@ -1,17 +1,36 @@
 {% extends 'base.html' %}
 
 {% block head %}
+
+<script>
+    function cTime() {
+        var d = new Date();
+        var h = d.getHours();
+        var m = d.getMinutes();
+        m = m.checkTime(m);
+        document.querySelector('currentTime').innerHTML = 'Content';
+    }
+</script>
+
 {% endblock %}
 
 {% block body %}
-    <div id="homepage">
+
+    <div id="homepage" onload="cTime()">
         <button id="configureLink">Configure Application</button>
         Welcome to the better class calendar.
         <br>
         <h1>Welcome, <i>{{name}}</i>.</h1>
         <br>
-        <h1>The time is <u>test{{cTime}}</u>.</h1>
+        <h1 id="currentTime"> </h1>
         
+        {% if 1 == 1 %}
+
+        {% else %}
+
         <h1><b>[cName]</b> starts in <u>[cTime minus class start time]</u> minutes.<h1>
+
+        {% endif %}
     </div>
+
 {% endblock %}

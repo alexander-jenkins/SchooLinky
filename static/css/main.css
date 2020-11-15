@@ -3,6 +3,8 @@ body {
   margin: 0;
   font-family: sans-serif;
   text-align: center;
+  background-color: #94b1d1;
+  color: #000000;
 }
 
 #homepage {

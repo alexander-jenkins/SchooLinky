@@ -1,7 +1,7 @@
 # import dependencies and create the app
 from flask import Flask, render_template, url_for, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
-import datetime  
+import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Classes.db'
@@ -33,15 +33,12 @@ def setName():
     return redirect('/configure')
 
 # index page
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        global name
-        name = request.form('name')
-        return render_template('/public/index.html',name=name)
-    else:
-        classes = StudentClass.query.order_by(StudentClass.title).all()
-        return render_template('/public/index.html', classes=classes, name=name)
+    global name
+    cTime = datetime.datetime.now()
+    cTime = cTime.strftime('%H:%M')
+    return render_template('/public/index.html', name=name, ctime=cTime)
 
 # configure page for adding / remoiving classes
 @app.route('/configure', methods=['POST', 'GET'])

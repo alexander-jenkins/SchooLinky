@@ -1,18 +1,6 @@
 {% extends 'base.html' %}
 
-{% block head %}
-
-<script>
-    function cTime() {
-        var d = new Date();
-        var h = d.getHours();
-        var m = d.getMinutes();
-        m = m.checkTime(m);
-        document.querySelector('currentTime').innerHTML = 'Content';
-    }
-</script>
-
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block body %}
 
@@ -22,7 +10,7 @@
         <br>
         <h1>Welcome, <i>{{name}}</i>.</h1>
         <br>
-        <h1 id="currentTime"> </h1>
+        <h1>It Is Currently {{ctime}}</h1>
         
         {% if 1 == 1 %}
 

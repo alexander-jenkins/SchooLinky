@@ -4,12 +4,6 @@ homeButton.onclick = function() {
     window.open("/", name="_self");
 }
 
-// configure button code
-var confButton = document.getElementById("configureLink");
-confButton.onclick = function() {
-    window.open("/configure", name="_self");
-}
-
 // code for the modal setName menu
 var nameModal = document.getElementById("setName");
 var nameBtn = document.getElementById("setNameBtn");

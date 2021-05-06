@@ -1,5 +1,5 @@
 # Status Update!
-SchooLinky is currently being rebased to javascript and will be hosted as a webapp. There currently is no timelime for updates or releases as I am working on this in my free time as a university student.
+SchooLinky is currently being rebased to javascript and will be hosted as a web app. There currently is no timeline for updates or releases as I am working on this in my free time as a university student.
 
 ![Icon](https://raw.githubusercontent.com/alexander-jenkins/SchooLinky/main/static/images/iconBigger.png)
 # What is SchooLinky?
